@@ -11,7 +11,7 @@ export default function name() {
                 className="form-control"/>
                     </div>
                     <div className="col-3">
-                        <input type="submit" value="Search" className="btn btn-primary"/>
+                        <input type="submit" value="Search" className="btn btn-primary w-100"/>
                     </div>
                 </div>
             </form>
@@ -24,7 +24,8 @@ export default function name() {
                 <div className="col-6">
                     <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
                     alt="Mostly Cloudy"/>
-                    6ºC
+                    <span className="temperature">6 </span>
+                    <span className="unit">ºC</span>
                 </div>
                 <div className="col-6">
                     <ul>
