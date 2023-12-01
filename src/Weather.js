@@ -3,16 +3,23 @@ import "./Weather.css";
 import axios from "axios";
 
 export default function Weather() {
-    const [ready, setReady] = useState(false);
-    const [temperature, setTemperature] = useState(null);
+    const [weatherData, setWeatherData] = useState({ ready: false });
     function handleResponse(response) {
         console.log(response.data)
 
-        setTemperature(response.data.main.temp);
+        setWeatherData({
+            ready: true,
+            temperature: response.data.main.temp,
+            humidity: response.data.main.humidity,
+            wind: response.data.wind.speed,
+            description: response.data.weather[0].description,
+            city: response.data.name,
+            iconUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+            date: "Wednesday 07:00"
+        });
 
-        setReady(true);
     }
-    if (ready) {
+    if (weatherData.ready) {
         return (
 
             <div className="Weather">
@@ -27,23 +34,22 @@ export default function Weather() {
                         </div>
                     </div>
                 </form>
-                <h1>Makati</h1>
+                <h1>{weatherData.city}</h1>
                 <ul>
-                    <li>Wednesday 07:00</li>
-                    <li>Mostly Cloudy</li>
+                    <li>{weatherData.date}</li>
+                    <li className="text-capitalize">{weatherData.description}</li>
                 </ul>
                 <div className="row">
                     <div className="col-6">
-                        <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
-                        alt="Mostly Cloudy"/>
-                        <span className="temperature">{temperature} </span>
+                        {<img src={weatherData.iconUrl}
+                        alt={weatherData.description}/>}
+                        <span className="temperature">{Math.round(weatherData.temperature)} </span>
                         <span className="unit">ºC</span>
                     </div>
                     <div className="col-6">
                         <ul>
-                            <li>Precipitation: 2%</li>
-                            <li>Humidiry: 70%</li>
-                            <li>Wind: 13 km/h</li>
+                            <li>Humidity: {weatherData.humidity}%</li>
+                            <li>Wind: {weatherData.wind} km/h</li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +58,7 @@ export default function Weather() {
     } else {
         const apiKey = "04bde8cc7f569f7c5603cdbc6deb89a3";
         let city = "Makati";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;axios.get(apiUrl).then(handleResponse);
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;axios.get(apiUrl).then(handleResponse);
         
         return "Loading...";
     }
