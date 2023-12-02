@@ -40,7 +40,7 @@ export default function Weather(props) {
     if (weatherData.ready) {
         return (
             <div className="Weather">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-9">
                     <input type="search"
@@ -52,7 +52,6 @@ export default function Weather(props) {
                             <input type="submit"
                             value="Search"
                             className="btn btn-primary w-100"
-                            onSubmit={handleSubmit}
                             />
                         </div>
                     </div>
