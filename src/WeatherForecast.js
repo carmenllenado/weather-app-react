@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import "./WeatherForecast.css";
-import Weather from "./Weather";
 import WeatherForecastDay from "./WeatherForecastDay";
 
 export default function WeatherForecast(props) {
@@ -19,7 +18,7 @@ export default function WeatherForecast(props) {
         <div className="WeatherForecast">
            <div className="row">
             <div className="col-6">
-               <WeatherForecastDay data={forecast[0]}/>
+               <WeatherForecastDay data={forecast[0]} img={`https://openweathermap.org/img/wn/${forecast[0].weather[0].icon}.png`}/>
             </div>
            </div>
         </div>
