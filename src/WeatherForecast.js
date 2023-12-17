@@ -10,9 +10,7 @@ export default function WeatherForecast(props) {
     useEffect(() => {
         setLoaded(false);
     }, [props.coordinates]);
-
-    // if the coordinates change
-    // set loaded false
+    
 
     function handleResponse(response) {
         setForecast(response.data.daily);
@@ -28,7 +26,7 @@ export default function WeatherForecast(props) {
                 if (index < 5) {
                   return (
                 <div className="col" key={index}>
-               <WeatherForecastDay data={dailyForecast} img={`https://openweathermap.org/img/wn/${forecast[0].weather[0].icon}.png`}/>
+               <WeatherForecastDay data={dailyForecast} icon={forecast[0].weather[0].icon}/>
             </div>
             )  
         }
